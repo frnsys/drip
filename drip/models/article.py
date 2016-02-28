@@ -40,6 +40,13 @@ class Article(Keywordable):
         cleaned = clean('\n'.join([self.title, self.text]))
         return vectorizer.vectorize([cleaned])[0]
 
+    def as_dict(self):
+        whitelist = ['id', 'title', 'url', 'text', 'score', 'published', 'feed_id', 'source_id', 'event_id']
+        data = {attr: getattr(self, attr) for attr in whitelist}
+        data['authors'] = [a.as_dict() for a in self.authors]
+        data['keywords'] = [k.as_dict() for k in self.keywords]
+        return data
+
 
 class Author(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -56,3 +63,6 @@ class Author(db.Model):
             db.session.add(obj)
             db.session.commit()
         return obj
+
+    def as_dict(self):
+        return {'id': self.id, 'name': self.name}

@@ -92,5 +92,12 @@ def preview():
                 click.echo('\t\t{}'.format(a.title))
 
 
+@cli.command()
+def api():
+    """start the api server"""
+    app = create_app()
+    app.run(host='0.0.0.0', port=8080)
+
+
 if __name__ == '__main__':
     cli()

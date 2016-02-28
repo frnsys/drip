@@ -36,6 +36,19 @@ python d.py count
 
 # preview the events and stories
 python d.py preview
+
+# run the api
+python d.py api
 ```
 
 drip is still under active development.
+
+---
+
+There is a very simple API available to develop against.
+
+Run the API server and the following endpoints are available:
+
+- `/events` - the latest 50 events
+- `/stories` - the latest 50 stories
+- `/events/<id>` - a single event

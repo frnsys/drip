@@ -51,3 +51,11 @@ class Event(Keywordable):
     def candidates(cls, dt):
         """return "active" events - those that are not too old given a datetime `dt`"""
         return cls.query.filter(dt - Event.created_at < timedelta(hours=36)).all()
+
+    def as_dict(self):
+        whitelist = ['id', 'title', 'created_at', 'updated_at', 'story_id']
+        data = {attr: getattr(self, attr) for attr in whitelist}
+        data['summary'] = self.summary.split('\n')
+        data['articles'] = [a.as_dict() for a in self.articles]
+        data['keywords'] = [k.as_dict() for k in self.keywords]
+        return data

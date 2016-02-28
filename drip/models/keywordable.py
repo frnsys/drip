@@ -45,3 +45,6 @@ class Keyword(db.Model):
             db.session.add(obj)
             db.session.commit()
         return obj
+
+    def as_dict(self):
+        return {'id': self.id, 'name': self.name}

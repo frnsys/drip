@@ -45,3 +45,10 @@ class Story(Keywordable):
                     continue
                 candidates[s] += global_term_idf[kw.name]
         return sorted(candidates.items(), key=lambda t: t[1], reverse=True)
+
+    def as_dict(self):
+        whitelist = ['id', 'created_at', 'updated_at']
+        data = {attr: getattr(self, attr) for attr in whitelist}
+        data['events'] = [e.as_dict() for e in self.events]
+        data['keywords'] = [k.as_dict() for k in self.keywords]
+        return data

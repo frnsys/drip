@@ -21,9 +21,7 @@ def join_table(name, a, b):
             db.Integer,
             db.ForeignKey('{0}.id'.format(a), ondelete='CASCADE', onupdate='CASCADE'),
             primary_key=True),
-
         db.Column('{0}_id'.format(b),
             db.Integer,
             db.ForeignKey('{0}.id'.format(b), ondelete='CASCADE', onupdate='CASCADE'),
-            primary_key=True)
-)
+            primary_key=True))
